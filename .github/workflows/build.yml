@@ -9,10 +9,8 @@ jobs:
         with:
           distribution: temurin
           java-version: 17
-      - uses: android-actions/setup-android@v3
-      - run: sdkmanager "platforms;android-34" "build-tools;34.0.0"
       - run: unzip -q -o ./*.zip -d proj
-      - run: cd proj && chmod +x build.sh && ./build.sh
+      - run: cd proj && chmod +x build.sh && ANDROID_HOME="${ANDROID_HOME:-/usr/local/lib/android/sdk}" ./build.sh
       - uses: actions/upload-artifact@v4
         with:
           name: stems-mtp
